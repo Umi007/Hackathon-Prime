@@ -32,7 +32,7 @@ public class Loan {
     @Column
     private Timestamp expires_at;
     @Column
-    private boolean is_active;
+    private boolean isActive;
 
     // Default constructors for the Condition class.
     public Loan(int id, Book book, User borrower)
@@ -41,5 +41,6 @@ public class Loan {
         this.book = book;
         this.borrower = borrower;
         this.expires_at = new Timestamp(System.currentTimeMillis() + 604800000);
+        this.isActive = true;
     }
 }
