@@ -27,6 +27,8 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
+    @Transient
+    private boolean isLent;
 
     // Default constructor for the Condition class.
     public Book(int id, String title, String author, User owner)

@@ -1,4 +1,5 @@
 package com.colibris.Colibris.repository;
+import com.colibris.Colibris.model.Book;
 import com.colibris.Colibris.model.Loan;
 import com.colibris.Colibris.model.User;
 import org.springframework.data.repository.CrudRepository;
@@ -10,5 +11,6 @@ public interface LoanRepository extends CrudRepository<Loan, Integer> {
     public Optional<Loan> findById(Integer id);
     public List<Loan> findByBorrower(User borrower);
     public List<Loan> findByBorrowerAndIsActive(User borrower, boolean isActive);
+    public Optional<Loan> findByBookAndIsActive(Book book, boolean isActive);
     public List<Loan> findAll();
 }

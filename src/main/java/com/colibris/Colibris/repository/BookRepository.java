@@ -10,5 +10,7 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     public Optional<Book> findById(Integer id);
     public List<Book> findByTitle(String title);
     public List<Book> findByGenre(String genre);
+    public List<Book> findByOwner(User owner);
+    public List<Book> findAll();
 
 }
