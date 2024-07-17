@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -54,8 +55,9 @@ public class LoanController {
 //    }
 
     @PostMapping("api/books/{book_id}/loans")
-    public List<Loan> borrowBook(@PathVariable Integer book_id, @RequestParam Integer user_id) {
-        Optional<User> optionalUser = userRepository.findById(user_id);
+    public List<Loan> borrowBook(@PathVariable Integer book_id, @RequestBody Map<String, Object> requestBody ) {
+        Integer userId = (int) requestBody.get("user_id");
+        Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) return new ArrayList<>();
         User user = optionalUser.get();
 
@@ -73,7 +75,7 @@ public class LoanController {
         Loan loan = new Loan(user, book);
         loanRepository.save(loan);
 
-        return getAllUserLoans(user_id);
+        return getAllUserLoans(userId);
     }
 
     // TODO: move this to BookController

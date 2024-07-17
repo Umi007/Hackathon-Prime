@@ -1,7 +1,33 @@
 import Card from "@mui/material/Card";
 import CardContent from '@mui/material/CardContent';
+import { useEffect, useState } from "react";
 
 function BookCard({book}) {
+    console.log(book.lent, "<<")
+    const [buttonText, setButtonText] = !book.lent ? useState("Borrow Book") : useState("On Loan")
+        // TODO: extract user id from logged in user, instead of hard coding in user_id 1 for post loan
+    const borrowBookClick = () =>{
+        setButtonText("On Loan");
+
+            const postLoan = async () => {
+                const response = await fetch(`api/books/${book.id}/loans`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "user_id": 1,
+                    }),
+                    headers: { 
+                        "Content-type": "application/json; charset=UTF-8"
+                    } 
+                });
+                console.log("hello")
+                console.log(response, "<< response")
+                const data = await response.json();
+                console.log(data, "<< loan data");
+            }
+            postLoan();
+ 
+    }
+
     return (
         <>
             <Card
@@ -13,7 +39,7 @@ function BookCard({book}) {
                     <p>{book.genre}</p>
                     <p>{book.owner.username}</p>
 
-                    <button onClick={() => console.log('Button clicked!')}>Borrow Book</button>
+                    <button onClick={borrowBookClick}>{buttonText}</button>
                 </div>
             </Card>
         </>
