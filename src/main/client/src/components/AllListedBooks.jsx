@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
 
-function AllListedBooks() {
-
+function AllListedBooks({userId}) {
     const [allBooks, setAllBooks] = useState([])
+
+    console.log(userId)
+
+
     useEffect(() => {
         const fetchBooks = async () => {
             const response = await fetch('/api/books');
