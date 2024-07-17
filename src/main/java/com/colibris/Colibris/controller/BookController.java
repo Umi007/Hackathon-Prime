@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class BookController {
+public class    BookController {
     @Autowired
     BookRepository bookRepository;
 
@@ -48,7 +48,7 @@ public class BookController {
         return bookRepository.findByOwner(optionalUser.get());
     }
 
-    @PostMapping("/api/users/{user_id}/books/new")
+    @PostMapping("/api/users/{user_id}/books")
     public List<Book> createUserBook(@PathVariable Integer user_id, @RequestBody Book book) {
         Optional<User> optionalUser = userRepository.findById(user_id);
         if (optionalUser.isEmpty()) return new ArrayList<Book>();
@@ -58,7 +58,7 @@ public class BookController {
         return bookRepository.findByOwner(optionalUser.get());
     }
 
-    @PostMapping("/api/users/{user_id}/books/delete")
+    @DeleteMapping("/api/users/{user_id}/books")
     public List<Book> deleteBook(@PathVariable Integer user_id, @RequestBody Book book) {
         if (isBookLent(book)){
             //TODO error message "Cannot delete currently loaned book"

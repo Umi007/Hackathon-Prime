@@ -33,24 +33,25 @@ public class LoanController {
         return getBooksFromLoans(loanRepository.findByBorrowerAndIsActive(optionalUser.get(), true));
     }
 
-    @PostMapping("/api/users/{user_id}/books")
-    public List<Book> deactivateLoan(@PathVariable Integer user_id, @RequestBody Book loanedBook) {
-        Optional<User> optionalUser = userRepository.findById(user_id);
-        if (optionalUser.isEmpty()) return new ArrayList<Book>();
-        //TODO Authenticate user owns book
-        Optional<Loan> optionalLoan = loanRepository.findByBookAndIsActive(loanedBook, true);
-        if (optionalLoan.isEmpty()) {
-            //TODO error message "Can't return book that isn't lent"
-        }
-        else{
-            Loan loan = optionalLoan.get();
-            loan.setActive(false);
-            loanRepository.save(loan);
-        }
-        List<Book> books = bookRepository.findByOwner(optionalUser.get());
-        for (Book book : books) book.setLent(isBookLent(book));
-        return bookRepository.findByOwner(optionalUser.get());
-    }
+//    rework mapping of resource
+//    @PostMapping("/api/users/{user_id}/books")
+//    public List<Book> deactivateLoan(@PathVariable Integer user_id, @RequestBody Book loanedBook) {
+//        Optional<User> optionalUser = userRepository.findById(user_id);
+//        if (optionalUser.isEmpty()) return new ArrayList<Book>();
+//        //TODO Authenticate user owns book
+//        Optional<Loan> optionalLoan = loanRepository.findByBookAndIsActive(loanedBook, true);
+//        if (optionalLoan.isEmpty()) {
+//            //TODO error message "Can't return book that isn't lent"
+//        }
+//        else{
+//            Loan loan = optionalLoan.get();
+//            loan.setActive(false);
+//            loanRepository.save(loan);
+//        }
+//        List<Book> books = bookRepository.findByOwner(optionalUser.get());
+//        for (Book book : books) book.setLent(isBookLent(book));
+//        return bookRepository.findByOwner(optionalUser.get());
+//    }
 
     @PostMapping("/api/users/{user_id}/loans")
     public List<Book> borrowBook(@PathVariable Integer user_id, @RequestBody Loan loan) {
