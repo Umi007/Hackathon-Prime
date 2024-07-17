@@ -6,7 +6,9 @@ import './App.css'
 import SignUp from './components/SignUp';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userId, setUserId] = useState(null);
+
+  console.log("Logging user id App:" + userId)
 
   useEffect(() => {
       fetch('/api/ping')
@@ -15,13 +17,12 @@ function App() {
 
   return (
     <>
-      {/* HEADER */}
       <Header />
-        <Routes>
-          <Route path="/" element={<AllListedBooks />} />
-          <Route path="/signup" element={<SignUp/>} />
-          {/* <Route path="/mydashboard" element={<MyBooksElement />} /> */}
-        </Routes>
+      <Routes>
+        <Route path="/" element={<AllListedBooks userId={userId} />} />
+        <Route path="/signup" element={<SignUp setUserId={setUserId}/>} />
+        {/* <Route path="/mydashboard" element={<MyBooksElement />} /> */}
+      </Routes>
     </>
   )
 }
