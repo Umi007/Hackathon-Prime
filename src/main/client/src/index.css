@@ -15,18 +15,18 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #CF7650;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #D5A187;
 }
 
 body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 100%;
   min-height: 100vh;
 }
 
@@ -35,6 +35,21 @@ h1 {
   line-height: 1.1;
 }
 
+.book-card-content {
+  display: flex;
+  flex-direction: row;
+}
+
+/* not working, need to update */
+.MuiCard-root {
+  border: 3px solid grey;
+  border-radius: 20px;
+  margin-left: 5vw;
+  margin-bottom: 1vw;
+  width: 80%;
+}
+
+/* everything below this to be updated */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
