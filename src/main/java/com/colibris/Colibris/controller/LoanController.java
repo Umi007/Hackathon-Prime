@@ -53,15 +53,26 @@ public class LoanController {
 //        return bookRepository.findByOwner(optionalUser.get());
 //    }
 
-    @PostMapping("/api/users/{user_id}/loans")
-    public List<Book> borrowBook(@PathVariable Integer user_id, @RequestBody Loan loan) {
+    @PostMapping("api/books/{book_id}/loans")
+    public List<Book> borrowBook(@PathVariable Integer book_id, @RequestParam Integer user_id) {
         Optional<User> optionalUser = userRepository.findById(user_id);
         if (optionalUser.isEmpty()) return new ArrayList<Book>();
-        Book book = loan.getBook();
-        if (isBookLent(book)) {
-            //TODO error message "cannot borrow a book that is already lent"
+        User user = optionalUser.get();
+
+        Optional<Book> optionalBook = bookRepository.findById(book_id);
+        if (optionalBook.isEmpty()) {
+            // TODO error message "Add error handling"
+            return new ArrayList<>();
         }
-        else loanRepository.save(loan);
+        Book book = optionalBook.get();
+        if (isBookLent(book)) {
+            // TODO error message "cannot borrow a book that is already lent"
+            return new ArrayList<>();
+        }
+
+        Loan loan = new Loan(user, book);
+        loanRepository.save(loan);
+
         return getAllUserLoans(user_id);
     }
 

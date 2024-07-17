@@ -67,10 +67,11 @@ public class    BookController {
             return new ArrayList<>();
         }
         Book book = optionalBook.get();
-        if (isBookLent(book)){
+        if (isBookLent(book)) {
             // TODO error message "Cannot delete currently loaned book"
+        } else {
+            bookRepository.delete(book);
         }
-        else bookRepository.delete(book);
         return getAllUserBooks(user_id);
 
     }
