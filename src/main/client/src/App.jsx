@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Header from './components/Header';
 import AllListedBooks from "./components/AllListedBooks";
 import './App.css'
+import SignUp from './components/SignUp';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
       <Header />
         <Routes>
           <Route path="/" element={<AllListedBooks />} />
+          <Route path="/signup" element={<SignUp/>} />
           {/* <Route path="/mydashboard" element={<MyBooksElement />} /> */}
         </Routes>
     </>
