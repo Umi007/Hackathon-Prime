@@ -58,10 +58,17 @@ public class    BookController {
         return bookRepository.findByOwner(optionalUser.get());
     }
 
-    @DeleteMapping("/api/users/{user_id}/books")
-    public List<Book> deleteBook(@PathVariable Integer user_id, @RequestBody Book book) {
+    @DeleteMapping("/api/users/{user_id}/books/{book_id}")
+    public List<Book> deleteBook(@PathVariable Integer user_id, @PathVariable Integer book_id) {
+        // TODO: check user exists
+        Optional<Book> optionalBook = bookRepository.findById(book_id);
+        if (optionalBook.isEmpty()) {
+            // TODO error message "Add error handling"
+            return new ArrayList<>();
+        }
+        Book book = optionalBook.get();
         if (isBookLent(book)){
-            //TODO error message "Cannot delete currently loaned book"
+            // TODO error message "Cannot delete currently loaned book"
         }
         else bookRepository.delete(book);
         return getAllUserBooks(user_id);
