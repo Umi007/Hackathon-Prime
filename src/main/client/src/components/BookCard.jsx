@@ -3,8 +3,8 @@ import CardContent from '@mui/material/CardContent';
 import { useEffect, useState } from "react";
 
 function BookCard({book}) {
-    console.log(book.isLent, "<<")
-    const [buttonText, setButtonText] = !book.isLent ? useState("Borrow Book") : useState("On Loan")
+    console.log(book.lent, "<<")
+    const [buttonText, setButtonText] = !book.lent ? useState("Borrow Book") : useState("On Loan")
         // TODO: extract user id from logged in user, instead of hard coding in user_id 1 for post loan
     const borrowBookClick = () =>{
         setButtonText("On Loan");
