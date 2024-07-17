@@ -27,7 +27,10 @@ public class    BookController {
 
     @GetMapping("/api/books")
     public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+        List<Book> books = bookRepository.findAll();
+        for (Book book : books) book.setLent(isBookLent(book));
+
+        return books;
     }
 
     @GetMapping("/api/books/{book_id}")
