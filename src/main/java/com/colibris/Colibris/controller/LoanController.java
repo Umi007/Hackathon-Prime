@@ -27,10 +27,10 @@ public class LoanController {
 
 
     @GetMapping("/api/users/{user_id}/loans")
-    public List<Book> getAllUserLoans(@PathVariable Integer user_id) {
+    public List<Loan> getAllUserLoans(@PathVariable Integer user_id) {
         Optional<User> optionalUser = userRepository.findById(user_id);
-        if (optionalUser.isEmpty()) return new ArrayList<Book>();
-        return getBooksFromLoans(loanRepository.findByBorrowerAndIsActive(optionalUser.get(), true));
+        if (optionalUser.isEmpty()) return new ArrayList<Loan>();
+        return loanRepository.findByBorrowerAndIsActive(optionalUser.get(), true);
     }
 
 //    rework mapping of resource
@@ -54,9 +54,9 @@ public class LoanController {
 //    }
 
     @PostMapping("api/books/{book_id}/loans")
-    public List<Book> borrowBook(@PathVariable Integer book_id, @RequestParam Integer user_id) {
+    public List<Loan> borrowBook(@PathVariable Integer book_id, @RequestParam Integer user_id) {
         Optional<User> optionalUser = userRepository.findById(user_id);
-        if (optionalUser.isEmpty()) return new ArrayList<Book>();
+        if (optionalUser.isEmpty()) return new ArrayList<>();
         User user = optionalUser.get();
 
         Optional<Book> optionalBook = bookRepository.findById(book_id);
@@ -76,6 +76,7 @@ public class LoanController {
         return getAllUserLoans(user_id);
     }
 
+    // TODO: move this to BookController
     private List<Book> getBooksFromLoans(List<Loan> loans){
         return loans.stream().map(Loan::getBook).toList();
     }
