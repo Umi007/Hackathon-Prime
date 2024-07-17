@@ -56,7 +56,7 @@ public class LoanController {
 
     @PostMapping("api/books/{book_id}/loans")
     public List<Loan> borrowBook(@PathVariable Integer book_id, @RequestBody Map<String, Object> requestBody ) {
-        Integer userId = (int) requestBody.get("user_id");
+        Integer userId = (int) requestBody.get("userId");
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) return new ArrayList<>();
         User user = optionalUser.get();

@@ -1,13 +1,10 @@
 package com.colibris.Colibris.controller;
 
 import com.colibris.Colibris.model.User;
-import com.colibris.Colibris.repository.BookRepository;
-import com.colibris.Colibris.repository.LoanRepository;
 import com.colibris.Colibris.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
