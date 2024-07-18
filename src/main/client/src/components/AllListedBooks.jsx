@@ -22,7 +22,7 @@ function AllListedBooks({userId}) {
             <main>
             {allBooks.map((book) => {
                 return (
-                    <BookCard book={book}></BookCard>
+                    <BookCard book={book} userId={userId}></BookCard>
                 );
             })}
             </main>
